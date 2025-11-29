@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GIMTMTA — Membership Registration</title>
+  <meta name="description" content="Membership registration form for GIADS MUGUDU TARE MUSSERA TARE Association (GIMTMIA)">
+
+  <style>
+    :root{
+      --accent:#0a58ca;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --bg:#f5f7fb;
+      --radius:12px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;font-family:Inter, "Segoe UI", Roboto, Arial, sans-serif;
+      background:var(--bg);color:#111;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    .wrap{max-width:960px;margin:28px auto;padding:20px;}
+    .card{
+      background:var(--card);border-radius:var(--radius);padding:18px;
+      box-shadow:0 8px 30px rgba(12,18,30,0.06);
+    }
+
+    header{display:flex;gap:16px;align-items:center}
+    header img{width:86px;height:86px;object-fit:contain;border-radius:10px;border:1px solid #eee;padding:6px;background:#fff}
+    h1{margin:0;font-size:20px}
+    p.lead{margin:6px 0 0;color:var(--muted)}
+
+    form{margin-top:18px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    label{display:block;font-size:13px;margin-bottom:6px}
+    input[type="text"], input[type="email"], input[type="date"], select, textarea {
+      width:100%;padding:10px;border-radius:8px;border:1px solid #d8dce6;font-size:14px;
+    }
+    textarea{min-height:90px;resize:vertical}
+    .full{grid-column:1 / -1}
+
+    .small{font-size:13px;color:var(--muted)}
+    .actions{display:flex;gap:10px;align-items:center;margin-top:8px}
+    button{padding:10px 14px;border-radius:8px;border:0;background:var(--accent);color:#fff;cursor:pointer}
+    button.secondary{background:#6b7280}
+
+    .success{display:none;background:#e6ffef;border-left:4px solid #16a34a;padding:10px;border-radius:6px;margin-top:12px;color:#064e2a}
+    .error{display:none;background:#ffe6e6;border-left:4px solid #d13434;padding:10px;border-radius:6px;margin-top:12px;color:#7a1616}
+
+    .upload-preview{display:flex;gap:8px;align-items:center}
+    .upload-preview img{width:60px;height:60px;object-fit:cover;border-radius:6px;border:1px solid #ddd}
+
+    @media (max-width:760px){
+      form{grid-template-columns:1fr}
+      header{flex-direction:row}
+    }
+
+    footer{margin-top:14px;font-size:13px;color:var(--muted)}
+    .note{font-size:13px;color:var(--muted);margin-top:8px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <header>
+        <img id="logoPreview" src="logo.png" alt="Logo" onerror="this.style.display='none'">
+        <div>
+          <h1>GIADE MUGUDU TARE MUTSERA TARE ASSOCIATION (GIMTMTA)</h1>
+          <p class="lead">Membership registration form — fill details and click Submit</p>
+        </div>
+      </header>
+
+      <form id="memberForm" autocomplete="off">
+        <div>
+          <label for="firstName">First Name *</label>
+          <input id="firstName" name="firstName" type="text" required>
+        </div>
+
+        <div>
+          <label for="surname">Surname *</label>
+          <input id="surname" name="surname" type="text" required>
+        </div>
+
+        <div>
+          <label for="lastName">Last Name</label>
+          <input id="lastName" name="lastName" type="text">
+        </div>
+
+        <div>
+          <label for="dob">Date of Birth</label>
+          <input id="dob" name="dob" type="date" max="">
+        </div>
+
+        <div>
+          <label for="email">Email Address *</label>
+          <input id="email" name="email" type="email" required>
+        </div>
+
+        <div>
+          <label for="state">State *</label>
+          <select id="state" name="state" required>
+            <option value="">-- Select state --</option>
+            <option value="Bauchi">Bauchi</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="lga">LGA (Bauchi) *</label>
+          <select id="lga" name="lga" required>
+            <option value="">-- Select LGA --</option>
+            <option>Alkaleri</option>
+            <option>Bauchi</option>
+            <option>Bogoro</option>
+            <option>Damban</option>
+            <option>Darazo</option>
+            <option>Dass</option>
+            <option>Gamawa</option>
+            <option>Ganjuwa</option>
+            <option>Giade</option>
+            <option>Itas/Gadau</option>
+            <option>Jama'are</option>
+            <option>Katagum</option>
+            <option>Kirfi</option>
+            <option>Misau</option>
+            <option>Ningi</option>
+            <option>Shira</option>
+            <option>Tafawa Balewa</option>
+            <option>Toro</option>
+            <option>Warji</option>
+            <option>Zaki</option>
+          </select>
+        </div>
+
+        <div class="full">
+          <label for="address">Resident Address</label>
+          <textarea id="address" name="address"></textarea>
+        </div>
+
+        <div>
+          <label for="membershipNo">Membership Number (leave empty to auto-generate)</label>
+          <input id="membershipNo" name="membershipNo" type="text" placeholder="M-123456">
+        </div>
+
+        <div>
+          <label for="photo">Upload Photo (optional)</label>
+          <input id="photo" name="photo" type="file" accept="image/*">
+          <div class="upload-preview" id="previewBox" style="display:none;margin-top:8px">
+            <img id="previewImg" src="#" alt="preview">
+            <span class="small">Preview</span>
+          </div>
+        </div>
+
+        <div class="full actions">
+          <button type="submit">Submit</button>
+          <button type="button" class="secondary" id="downloadCsv">Download CSV</button>
+          <button type="button" class="secondary" id="clearAll">Clear All</button>
+        </div>
+      </form>
+
+      <div class="success" id="successBox">Saved locally. You can download CSV or send to email (Formspree).</div>
+      <div class="error" id="errorBox"></div>
+
+      <div class="note">
+        <strong>Note:</strong> To send the form to your email, get a Formspree endpoint and paste it into the script where indicated.
+      </div>
+
+      <footer>
+        <div class="small">Export: saved records stored in your browser (localStorage). Use "Download CSV" to get a file. For real server storage, set up an API or use Formspree.</div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    // Set max date for DOB to today
+    document.getElementById('dob').max = new Date().toISOString().split('T')[0];
+
+    const form = document.getElementById('memberForm');
+    const successBox = document.getElementById('successBox');
+    const errorBox = document.getElementById('errorBox');
+    const downloadBtn = document.getElementById('downloadCsv');
+    const clearBtn = document.getElementById('clearAll');
+
+    // Preview for uploaded photo
+    const photoInput = document.getElementById('photo');
+    const previewBox = document.getElementById('previewBox');
+    const previewImg = document.getElementById('previewImg');
+
+    photoInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if(!file) { previewBox.style.display = 'none'; return; }
+      const reader = new FileReader();
+      reader.onload = function(ev){ previewImg.src = ev.target.result; previewBox.style.display = 'flex'; }
+      reader.readAsDataURL(file);
+    });
+
+    function showSuccess(text){
+      successBox.textContent = text; successBox.style.display = 'block';
+      errorBox.style.display = 'none';
+      setTimeout(()=> successBox.style.display = 'none', 4000);
+    }
+    function showError(text){
+      errorBox.textContent = text; errorBox.style.display = 'block';
+      successBox.style.display = 'none';
+      setTimeout(()=> errorBox.style.display = 'none', 6000);
+    }
+
+    // Escape CSV values
+    function csvEscape(str){
+      if(str === undefined || str === null) return '';
+      return '"' + String(str).replace(/"/g, '""') + '"';
+    }
+
+    // Download CSV from saved records
+    function downloadCSV(){
+      const data = JSON.parse(localStorage.getItem('gimtmia_members') || '[]');
+      if(!data.length){ alert('No saved members'); return; }
+      const headers = Object.keys(data[0]);
+      const rows = data.map(r => headers.map(h => csvEscape(r[h])).join(','));
+      const csv = [headers.join(','), ...rows].join('\n');
+      const blob = new Blob([csv], {type:'text/csv'}); const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'members.csv'; a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    downloadBtn.addEventListener('click', downloadCSV);
+
+    clearBtn.addEventListener('click', () => {
+      if(confirm('Clear all saved member records from this browser?')) {
+        localStorage.removeItem('gimtmia_members'); showSuccess('All local records cleared.');
+      }
+    });
+
+    // Form submission
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      try{
+        const formData = new FormData(form);
+        const obj = {};
+        for(const [k,v] of formData.entries()){
+          // If file, store filename (full file bytes not saved to localStorage)
+          if(k === 'photo' && v && v.name) obj.photoName = v.name;
+          else obj[k] = v;
+        }
+
+        // Validate email simple
+        const email = obj.email || '';
+        if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ showError('Please enter a valid email address.'); return; }
+
+        // Membership number auto
+        if(!obj.membershipNo || String(obj.membershipNo).trim()===''){
+          obj.membershipNo = 'M-' + Date.now().toString().slice(-6);
+        }
+
+        obj.registeredAt = new Date().toISOString();
+
+        // Save to localStorage (append)
+        const arr = JSON.parse(localStorage.getItem('gimtmia_members') || '[]');
+        arr.push(obj);
+        localStorage.setItem('gimtmia_members', JSON.stringify(arr, null, 2));
+
+        showSuccess('Saved locally ✓');
+
+        // Optional: Submit to Formspree (if endpoint provided)
+        // Replace the string below with your real Formspree endpoint if you want email:
+        const FORMSPREE_ENDPOINT = 'YOUR_FORMSPREE_ENDPOINT_HERE';
+        if(FORMSPREE_ENDPOINT && !FORMSPREE_ENDPOINT.includes('YOUR_FORMSPREE_ENDPOINT_HERE')) {
+          // send minimal JSON to Formspree
+          try{
+            await fetch(FORMSPREE_ENDPOINT, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(obj)
+            });
+            showSuccess('Saved locally and submitted to Formspree ✓');
+          }catch(err){
+            showError('Saved locally, but Formspree submission failed: ' + err.message);
+          }
+        }
+
+        form.reset();
+        previewBox.style.display = 'none';
+      }catch(err){
+        showError('Error: ' + err.message);
+      }
+    });
+
+    // Pre-fill sample data function (for testing) - remove in production
+    // Uncomment to create one sample record:
+    // localStorage.setItem('gimtmia_members', JSON.stringify([{firstName:'Test', surname:'User', email:'a@b.com', state:'Bauchi', lga:'Bauchi', membershipNo:'M-000001', registeredAt: new Date().toISOString()}]));
+  </script>
+</body>
+</html>
